@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Competence &amp; Training Matrix</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Project workspace home">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span class="brand-copy"><strong>Northstar</strong><small>PROJECT WORKSPACE</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="sync-state"><span class="sync-dot"></span><span id="data-source">Demo data</span></span>
+        <button class="avatar" type="button" aria-label="Signed in as Alex Morgan">AM</button>
+      </div>
+    </header>
+
+    <section class="page-content">
+      <div class="breadcrumb"><span>Projects</span><span class="crumb-separator">/</span><span id="breadcrumb-project">HBRN — II01</span><span class="crumb-separator">/</span><strong>People &amp; capability</strong></div>
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">PEOPLE &amp; CAPABILITY</div>
+          <h1>Competence &amp; Training Matrix</h1>
+          <p class="page-description">Keep project readiness visible and every requirement on track.</p>
+        </div>
+        <div class="heading-actions">
+          <label class="project-picker"><span>PROJECT</span><select id="project-select" aria-label="Select project"></select><span class="select-chevron" aria-hidden="true">⌄</span></label>
+          <button class="button button-secondary" id="export-button" type="button"><span class="button-icon" aria-hidden="true">↓</span> Export</button>
+          <button class="button button-primary" id="add-member-button" type="button"><span aria-hidden="true">＋</span> Add project member</button>
+        </div>
+      </div>
+
+      <section class="project-strip" aria-label="Project document information">
+        <div class="project-mark" aria-hidden="true">H</div>
+        <div class="project-name-block"><strong id="project-name">Harbor North Redevelopment</strong><span>Project</span></div>
+        <span class="strip-divider"></span>
+        <div class="strip-item"><span>DOCUMENT REFERENCE</span><strong id="document-reference">II01-GA-HBRN-0001</strong></div>
+        <span class="strip-divider"></span>
+        <div class="strip-item updated-item"><span>LAST UPDATED</span><strong id="last-updated">11 Nov 2026, 08:42</strong></div>
+        <span class="project-stage"><span class="stage-dot"></span> Execution</span>
+      </section>
+
+      <section class="summary-grid" aria-label="Project completion summary">
+        <article class="summary-card">
+          <div class="card-top"><span class="card-label">PROJECT MEMBERS</span><span class="card-icon icon-purple" aria-hidden="true">♙</span></div>
+          <div class="card-value" id="member-count">0</div><div class="card-foot">On this project</div>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span class="card-label">TRAINING REQUIREMENTS</span><span class="card-icon icon-blue" aria-hidden="true">▤</span></div>
+          <div class="card-value" id="requirement-count">0</div><div class="card-foot">For this project</div>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span class="card-label">COMPLETED</span><span class="card-icon icon-green" aria-hidden="true">✓</span></div>
+          <div class="card-value" id="completed-count">0</div><div class="card-foot"><span class="status-text completed-text">On track</span> requirements</div>
+        </article>
+        <article class="summary-card outstanding-card">
+          <div class="card-top"><span class="card-label">OUTSTANDING</span><span class="card-icon icon-amber" aria-hidden="true">!</span></div>
+          <div class="card-value" id="outstanding-count">0</div><div class="card-foot"><span class="status-text outstanding-text">Needs attention</span> requirements</div>
+        </article>
+        <article class="completion-card">
+          <div class="completion-copy"><span class="card-label">PROJECT COMPLETION</span><strong id="completion-label">0%</strong><span>of required training completed</span></div>
+          <div class="progress-ring" id="progress-ring"><div class="ring-inner"><strong id="completion-ring-label">0%</strong><span>COMPLETE</span></div></div>
+        </article>
+      </section>
+
+      <nav class="view-tabs" aria-label="Matrix views">
+        <button class="view-tab active" id="matrix-tab" type="button" aria-selected="true"><span aria-hidden="true">▦</span> Competence matrix</button>
+        <button class="view-tab" id="outstanding-tab" type="button" aria-selected="false"><span aria-hidden="true">◷</span> Outstanding training <span class="tab-count" id="outstanding-tab-count">0</span></button>
+      </nav>
+
+      <section class="view-panel" id="matrix-view">
+        <div class="section-heading">
+          <div><h2>Project competence matrix</h2><p>Select a status to update a record, or choose a person or requirement for more detail.</p></div>
+          <button class="button button-outline" id="add-requirement-button" type="button"><span aria-hidden="true">＋</span> Add requirement</button>
+        </div>
+        <div class="filter-bar">
+          <label class="search-box"><span class="search-icon" aria-hidden="true"></span><input id="search-input" type="search" placeholder="Search people or requirements…" autocomplete="off"></label>
+          <label class="filter-select"><span class="sr-only">Discipline</span><select id="discipline-filter"><option value="">All disciplines</option></select><span aria-hidden="true">⌄</span></label>
+          <label class="filter-select requirement-filter"><span class="sr-only">Requirement</span><select id="requirement-filter"><option value="">All requirements</option></select><span aria-hidden="true">⌄</span></label>
+          <label class="filter-select"><span class="sr-only">Status</span><select id="status-filter"><option value="">All statuses</option><option value="completed">Completed</option><option value="required">Required / Outstanding</option><option value="planned">Planned / In progress</option><option value="notApplicable">Not applicable</option><option value="exempt">Exempt</option></select><span aria-hidden="true">⌄</span></label>
+          <label class="toggle-control"><input id="outstanding-only" type="checkbox"><span class="toggle-track"></span><span>Outstanding only</span></label>
+          <button class="clear-filters" id="clear-filters" type="button">Clear filters</button>
+        </div>
+        <div class="matrix-toolbar">
+          <div class="legend" aria-label="Status legend">
+            <span><i class="legend-dot status-completed"></i>Completed</span>
+            <span><i class="legend-dot status-required"></i>Outstanding</span>
+            <span><i class="legend-dot status-planned"></i>Planned</span>
+            <span><i class="legend-dot status-na"></i>Not applicable</span>
+            <span><i class="legend-dot status-exempt"></i>Exempt</span>
+          </div>
+          <span class="matrix-count" id="matrix-count">0 members</span>
+        </div>
+        <div class="matrix-viewport" id="matrix-viewport" tabindex="0" aria-label="Scrollable competence matrix">
+          <table class="matrix-table" id="matrix-table"><thead></thead><tbody></tbody></table>
+        </div>
+        <div class="empty-state hidden" id="matrix-empty"><div class="empty-illustration" aria-hidden="true">⌕</div><strong>No matching records</strong><span>Try changing or clearing your filters to see project members.</span><button class="button button-secondary" id="empty-clear-button" type="button">Clear filters</button></div>
+        <div class="matrix-footnote"><span class="info-icon" aria-hidden="true">i</span> Statuses reflect project requirements. Select a cell to update status, dates, owner, or evidence.</div>
+      </section>
+
+      <section class="view-panel hidden" id="outstanding-view">
+        <div class="section-heading">
+          <div><h2>Outstanding training</h2><p>Requirements that still need action across the selected project.</p></div>
+          <button class="button button-primary" id="record-completion-button" type="button"><span aria-hidden="true">＋</span> Record completion</button>
+        </div>
+        <div class="filter-bar outstanding-filter-bar">
+          <label class="search-box"><span class="search-icon" aria-hidden="true"></span><input id="outstanding-search" type="search" placeholder="Search employee or training…" autocomplete="off"></label>
+          <label class="filter-select"><span class="sr-only">Discipline</span><select id="outstanding-discipline-filter"><option value="">All disciplines</option></select><span aria-hidden="true">⌄</span></label>
+          <label class="filter-select"><span class="sr-only">Status</span><select id="outstanding-status-filter"><option value="">All statuses</option><option value="required">Required / Outstanding</option><option value="planned">Planned / In progress</option></select><span aria-hidden="true">⌄</span></label>
+          <span class="table-result-count" id="outstanding-result-count"></span>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table" id="outstanding-table">
+            <thead><tr><th><button data-sort="employee">EMPLOYEE <span>↕</span></button></th><th><button data-sort="discipline">DISCIPLINE <span>↕</span></button></th><th><button data-sort="requirement">TRAINING REQUIREMENT <span>↕</span></button></th><th><button data-sort="status">STATUS <span>↕</span></button></th><th><button data-sort="plannedDate">PLANNED DATE <span>↕</span></button></th><th><button data-sort="responsible">RESPONSIBLE PERSON <span>↕</span></button></th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <div class="empty-state table-empty hidden" id="outstanding-empty"><div class="empty-illustration" aria-hidden="true">✓</div><strong>All caught up</strong><span>No outstanding training matches these filters.</span></div>
+        </div>
+      </section>
+      <footer class="page-footer"><span>Competence &amp; Training Matrix</span><span>Project readiness, at a glance.</span></footer>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="modal-backdrop" role="presentation">
+    <section class="dialog" id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+      <div class="dialog-header"><div><span class="dialog-eyebrow" id="dialog-eyebrow">PROJECT RECORD</span><h2 id="dialog-title">Update record</h2><p id="dialog-description"></p></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog">×</button></div>
+      <form id="dialog-form"><div class="dialog-body" id="dialog-body"></div><div class="dialog-error hidden" id="dialog-error" role="alert"></div><div class="dialog-footer"><button class="button button-secondary dialog-cancel" type="button">Cancel</button><button class="button button-primary" id="dialog-save" type="submit">Save changes</button></div></form>
+    </section>
+  </div>
+
+  <div class="drawer-backdrop hidden" id="drawer-backdrop">
+    <aside class="detail-drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+      <div class="drawer-header"><div><span class="dialog-eyebrow" id="drawer-eyebrow">PROJECT MEMBER</span><h2 id="drawer-title"></h2><p id="drawer-subtitle"></p></div><button class="icon-button drawer-close" type="button" aria-label="Close details">×</button></div>
+      <div class="drawer-content" id="drawer-content"></div>
+      <div class="drawer-footer"><button class="button button-secondary drawer-close-button" type="button">Close</button></div>
+    </aside>
+  </div>
+
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
