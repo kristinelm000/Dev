@@ -1,13 +1,19 @@
 # Competence & Training Matrix
 
-A responsive competence and training management page built as a standalone prototype for a Model-Driven App experience.
+A responsive project workspace prototype with a Competence & Training Matrix and a Project Assurance & Control Plan.
 
 ## Run
 
-Open `index.html` in a modern browser. No build step or package installation is required.
+Open `index.html` or `assurance.html` in a modern browser. No build step or package installation is required.
 
-## Prototype data
+## Competence matrix prototype
 
-This repository did not contain an application shell, Dataverse schema, or existing data-access layer. The page therefore uses clearly labelled sample projects and records, with edits saved to this browser's `localStorage`. It does not connect to Dataverse. The data access and persistence functions in `app.js` are isolated so they can be replaced with the host application's Dataverse integration when its table schema and environment are available. Status values are represented by a fixed choice list in the prototype.
+The competence page uses sample projects and records saved to this browser's `localStorage`; it is not connected to Dataverse.
 
-The page includes project-scoped summaries and filters, a frozen employee column in the horizontally scrollable matrix, editable status/date/evidence records, employee and requirement detail drawers, centered add/edit dialogs, and a sortable outstanding-training view with CSV export.
+## Assurance plan
+
+The assurance page requires the Project Portal model-driven app so it can use the host `Xrm.WebApi` and current project context. It reads and writes the existing `cr952_projectactivity` table and its related Project, Person, Organisation, Discipline, and Activity Reference records. Choice values are read from Dataverse metadata at runtime. It does not seed, cache, or persist Project Activity data in browser storage, and it does not create Dataverse tables.
+
+Opening `assurance.html` outside the model-driven app displays a connection notice instead of sample or local data.
+
+When mapping rows from the Cuvette and Havsule workbooks, phase-tab names can be matched to the existing Project Phase Choice; activity titles, area headings, responsibility, focus/scope/objective, planned time, status, references and comments align with corresponding Project Activity fields. Responsible-party text can use an existing lookup only when it matches a Dataverse record; otherwise it belongs in the assignment text field. Workbook reason cells are often free text, while `cr952_reason` is a Choice, so only exact existing Choice labels are compatible. The page does not load workbook rows or create records; Dataverse remains its only runtime data source.

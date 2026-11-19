@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Project Assurance &amp; Control Plan</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="Project workspace home">
+          <span class="brand-mark" aria-hidden="true">N</span>
+          <span class="brand-copy"><strong>Northstar</strong><small>Project workspace</small></span>
+        </a>
+        <nav class="page-nav" aria-label="Project pages">
+          <a href="index.html">Competence matrix</a>
+          <a class="active" href="assurance.html" aria-current="page">Assurance plan</a>
+        </nav>
+        <div class="topbar-right">
+          <span class="connection-label" id="connection-label"><span></span> Connecting to Dataverse</span>
+          <button class="avatar" aria-label="Project workspace">PW</button>
+        </div>
+      </header>
+
+      <main class="page assurance-page">
+        <div class="breadcrumbs"><a href="index.html">Projects</a><span aria-hidden="true">/</span><span id="breadcrumb-project">Project</span><span aria-hidden="true">/</span><span>Assurance &amp; Control Plan</span></div>
+        <section class="page-heading assurance-heading" aria-labelledby="page-title">
+          <div class="heading-copy">
+            <div class="eyebrow">PROJECT GOVERNANCE</div>
+            <h1 id="page-title">Project Assurance &amp; Control Plan</h1>
+            <p class="subtitle">Plan, track and close assurance activities throughout the project lifecycle.</p>
+            <div class="document-meta">
+              <span><span class="meta-label">Project</span><strong id="selected-project-name">Select a project</strong></span>
+              <span class="meta-divider"></span>
+              <span><span class="meta-label">Current phase</span><strong id="selected-phase-name">—</strong></span>
+            </div>
+          </div>
+          <button class="button button-primary add-activity-button" id="add-activity" type="button" disabled><span aria-hidden="true">＋</span> Add Activity</button>
+        </section>
+
+        <section class="assurance-navigation surface-card" aria-label="Project and phase selection">
+          <div class="assurance-filter-row">
+            <div class="project-picker">
+              <label for="project-filter">Project</label>
+              <div class="select-wrap project-select-wrap"><select id="project-filter" aria-label="Select project" disabled></select><span class="chevron" aria-hidden="true"></span></div>
+            </div>
+            <div class="phase-picker">
+              <span class="filter-label">Project phase</span>
+              <div class="phase-tabs" id="phase-tabs" role="tablist" aria-label="Project phase" aria-orientation="horizontal"></div>
+            </div>
+          </div>
+          <div class="filters assurance-filters" aria-label="Filter assurance activities">
+            <label class="search-box assurance-search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search activities, objectives, owners or references..." aria-label="Search assurance activities" disabled></label>
+            <button class="filter-toggle" id="toggle-filters" type="button" aria-expanded="false" aria-controls="secondary-filters">More filters <span aria-hidden="true">⌄</span></button>
+            <div class="secondary-filters" id="secondary-filters">
+              <div class="select-wrap"><select id="activity-type-filter" aria-label="Filter by activity type" disabled><option value="">All activity types</option></select><span class="chevron" aria-hidden="true"></span></div>
+              <div class="select-wrap"><select id="area-filter" aria-label="Filter by discipline or area" disabled><option value="">All disciplines / areas</option></select><span class="chevron" aria-hidden="true"></span></div>
+              <div class="select-wrap"><select id="responsible-filter" aria-label="Filter by responsible party" disabled><option value="">All responsible parties</option></select><span class="chevron" aria-hidden="true"></span></div>
+              <div class="select-wrap"><select id="status-filter" aria-label="Filter by status" disabled><option value="">All statuses</option></select><span class="chevron" aria-hidden="true"></span></div>
+            </div>
+            <button class="clear-filters" id="clear-filters" type="button" disabled>Clear filters</button>
+          </div>
+        </section>
+
+        <section class="summary-grid assurance-summary" aria-label="Assurance plan summary">
+          <article class="summary-card">
+            <div class="summary-top"><span class="summary-icon assurance-total-icon" aria-hidden="true">▦</span><span class="summary-kicker">PLAN SCOPE</span></div>
+            <div class="summary-number" id="total-count">—</div><div class="summary-label">Total activities</div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-top"><span class="summary-icon requirements-icon" aria-hidden="true">◷</span><span class="summary-kicker">UPCOMING</span></div>
+            <div class="summary-number" id="planned-count">—</div><div class="summary-label">Planned / open</div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-top"><span class="summary-icon assurance-ongoing-icon" aria-hidden="true">↗</span><span class="summary-kicker">IN PROGRESS</span></div>
+            <div class="summary-number" id="ongoing-count">—</div><div class="summary-label">Ongoing</div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-top"><span class="summary-icon completed-icon" aria-hidden="true">✓</span><span class="summary-kicker">CLOSED</span></div>
+            <div class="summary-number" id="completed-count">—</div><div class="summary-label">Completed / closed</div>
+          </article>
+        </section>
+
+        <div class="overdue-banner" id="overdue-banner" role="status" hidden>
+          <span class="overdue-banner-icon" aria-hidden="true">!</span>
+          <span><strong id="overdue-count">0</strong> overdue activities need attention</span>
+          <button type="button" id="show-overdue">Show overdue</button>
+        </div>
+
+        <section class="view-panel assurance-plan-panel" aria-labelledby="plan-heading">
+          <div class="panel-heading">
+            <div><h2 id="plan-heading">Assurance plan</h2><p>Activities are grouped by discipline / area. Select a row to view or edit its details.</p></div>
+            <div class="plan-tools">
+              <label class="sort-control" for="sort-select">Sort by</label>
+              <div class="select-wrap sort-select-wrap"><select id="sort-select" aria-label="Sort activities" disabled><option value="default">Area, planned date</option><option value="date">Planned date</option><option value="status">Status</option><option value="activity">Activity</option><option value="responsible">Responsible party</option></select><span class="chevron" aria-hidden="true"></span></div>
+              <span class="record-count" id="record-count">0 activities</span>
+            </div>
+          </div>
+          <div class="connection-state" id="connection-state" role="status">
+            <span class="connection-state-icon" aria-hidden="true">↻</span>
+            <div><strong>Connecting to Dataverse</strong><p>Loading Project Activity records and existing Choice options.</p></div>
+          </div>
+          <div class="activity-groups" id="activity-groups" aria-live="polite"></div>
+          <div class="empty-state assurance-empty" id="empty-state" hidden>
+            <span class="empty-icon" aria-hidden="true">✓</span>
+            <h3 id="empty-title">No assurance activities have been created for this phase yet.</h3>
+            <p id="empty-description">Add an activity to start building this phase's assurance plan.</p>
+            <button class="button button-primary" id="empty-add" type="button">＋ Add Activity</button>
+          </div>
+        </section>
+      </main>
+      <footer class="app-footer"><span>Northstar Project Workspace</span><span>Project Assurance &amp; Control Plan <span class="footer-divider">·</span> Dataverse</span></footer>
+    </div>
+
+    <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+    <aside class="detail-drawer assurance-drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-label="Activity details" aria-hidden="true"></aside>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+    <script src="assurance.js"></script>
+  </body>
+</html>
